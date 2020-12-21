@@ -36,6 +36,6 @@ class AccountCreated extends Mailable
         return $this->with([
             'rawPassword' => $this->password
         ])
-            ->view('mails.account-crated');
+            ->view('mails.account-created');
     }
 }

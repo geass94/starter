@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="col-span-2">
-                        <form action="{{route('admin.users.store')}}" method="POST">
+                        <form action="{{route('admin.users.store')}}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="shadow overflow-hidden">
                                 <div class="p-4 bg-white">
@@ -23,7 +23,6 @@
                                         <div class="col-span-6 sm:col-span-3">
                                             <x-forms.input type="text" name="first_name" label="First Name" for="first-name"/>
                                         </div>
-
                                         <div class="col-span-6 sm:col-span-3">
                                             <x-forms.input type="text" name="last_name" label="Last Name" for="last-name"/>
                                         </div>

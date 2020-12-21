@@ -32,6 +32,10 @@
                                         <div class="col-span-6 sm:col-span-4">
                                             <x-forms.input type="email" name="email" value="{{ $user->email }}" readonly label="Email" for="email"/>
                                         </div>
+
+                                        <div class="col-span-6 sm:col-span-4">
+                                            <livewire:admin.user.regenerate-password user="{{ $user->id }}" />
+                                        </div>
                                         @can('grant roles')
                                             <div class="col-span-6 sm:col-span-3">
                                                 <x-forms.select for="roles" name="role[]" multiple label="Roles">
@@ -53,5 +57,4 @@
             </div>
         </div>
     </div>
-    <livewire:forms.dynamic-input type="text" label="Dynamic input" for="d-input" name="d_input[]" />
 </x-app-layout>

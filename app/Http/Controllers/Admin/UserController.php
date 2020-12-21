@@ -52,7 +52,7 @@ class UserController extends Controller
         ]);
         $password = Str::random(16);
         $user = User::create([
-            'name' => Str::slug($request->get('fist_name').' '.$request->get('last_name'), '_'),
+            'name' => Str::slug($request->get('first_name').' '.$request->get('last_name'), '_'),
             'first_name' => $request->get('fist_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
