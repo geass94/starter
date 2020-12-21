@@ -51,5 +51,16 @@ Route::group([
                 'destroy' => 'admin.users.delete'
             ]
         ]);
+
+        $router->resource('/roles', \App\Http\Controllers\Admin\RolesAndPermissionsController::class, [
+            'names' => [
+                'index' => 'admin.roles.index',
+                'create' => 'admin.roles.create',
+                'store' => 'admin.roles.store',
+                'edit' => 'admin.roles.edit',
+                'update' => 'admin.roles.update',
+                'destroy' => 'admin.roles.delete'
+            ]
+        ]);
     });
 });

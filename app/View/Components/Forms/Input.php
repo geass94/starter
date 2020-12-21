@@ -28,7 +28,7 @@ class Input extends Component
         $this->for = $for;
         $this->type = $type;
         $this->name = $name;
-        $this->value = $value;
+        $this->value = $value ?: old($name);
         $this->placeholder = $placeholder;
     }
 
