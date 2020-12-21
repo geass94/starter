@@ -41,7 +41,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -55,7 +55,7 @@ class UserController extends Controller
             'name' => Str::slug($request->get('fist_name').' '.$request->get('last_name'), '_'),
             'first_name' => $request->get('fist_name'),
             'last_name' => $request->get('last_name'),
-            'email' => 'root@starter.local',
+            'email' => $request->get('email'),
             'password' => Hash::make($password),
         ]);
         if ($request->get('role')) {
@@ -64,7 +64,7 @@ class UserController extends Controller
             $user->assignRole('User');
         }
         Mail::to($user)->send(new AccountCreated($user, $password));
-        redirect(route('admin.users.index'));
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -82,11 +82,12 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $user = User::query()->where('id', $id)->with('roles')->first();
+        return view('admin.users.edit', ['user' => $user, 'roles' => Role::all()]);
     }
 
     /**
@@ -94,11 +95,22 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+        ]);
+        $user = User::query()->where('id', $id)->with('roles')->first();
+        $user->first_name = $request->get('first_name');
+        $user->last_name = $request->get('last_name');
+        $roles = $user->roles->pluck('model_has_roles.id')->toArray();
+        $user->syncRoles(array_merge($roles, [$request->get('role')]));
+        $user->save();
+        return redirect(route('admin.users.edit', [$id]));
     }
 
     /**
