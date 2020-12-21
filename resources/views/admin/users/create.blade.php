@@ -21,32 +21,29 @@
                                 <div class="p-4 bg-white">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-3">
-                                            <x-forms.input type="text" name="first_name" label="First Name"/>
+                                            <x-forms.input type="text" name="first_name" label="First Name" for="first-name"/>
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3">
-                                            <x-forms.input type="text" name="last_name" label="Last Name"/>
+                                            <x-forms.input type="text" name="last_name" label="Last Name" for="last-name"/>
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-4">
-                                            <x-forms.input type="email" name="email" label="Email"/>
+                                            <x-forms.input type="email" name="email" label="Email" for="email"/>
                                         </div>
                                         @can('grant roles')
                                             <div class="col-span-6 sm:col-span-3">
-                                                <label for="roles" class="block text-sm font-medium text-gray-700">Roles</label>
-                                                <select id="roles" name="country" name="role" autocomplete="role" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                <x-forms.select for="roles" name="role" label="Roles">
                                                     @foreach($roles as $role)
                                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                                                     @endforeach
-                                                </select>
+                                                </x-forms.select>
                                             </div>
                                         @endcan
                                     </div>
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Save
-                                    </button>
+                                    <x-forms.button type="submit" label="Save" />
                                 </div>
                             </div>
                         </form>
@@ -55,4 +52,5 @@
             </div>
         </div>
     </div>
+    <livewire:forms.dynamic-input type="number" label="Dynamic input" for="d-input" name="d_input[]" />
 </x-app-layout>
