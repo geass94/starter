@@ -52,5 +52,5 @@
             </div>
         </div>
     </div>
-    <livewire:forms.dynamic-input type="number" label="Dynamic input" for="d-input" name="d_input[]" />
+    <livewire:forms.dynamic-input type="text" label="Dynamic input" for="d-input" name="d_input[]" />
 </x-app-layout>

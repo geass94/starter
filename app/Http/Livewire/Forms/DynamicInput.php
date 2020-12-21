@@ -10,7 +10,7 @@ class DynamicInput extends Component
     public $for;
     public $type;
     public $name;
-
+    public $value;
     public $i = 0;
     public $inputs = array();
 
@@ -25,7 +25,8 @@ class DynamicInput extends Component
     {
         $i+=1;
         $this->i = $i;
-        array_push($this->inputs, $i);
+        $this->inputs[$i] = $this->value;
+        $this->value = '';
     }
 
     public function remove($i) {
