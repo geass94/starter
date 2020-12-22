@@ -9,7 +9,12 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <x-starter-test />
             <x-jet-welcome />
+
+
             <livewire:forms.dynamic-input type="text" label="Dynamic input" for="d-input" name="d_input[]" />
+
+
+
         </div>
     </div>
 </x-app-layout>
