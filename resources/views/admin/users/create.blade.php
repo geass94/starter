@@ -4,8 +4,7 @@
             {{ __('Users') }}
         </h2>
     </x-slot>
-    <div class="container mx-auto my-5">
-        <div class="max-w-7xl px-4">
+    <div class="py-5">
             <div class="bg-white shadow-xl">
                 <div class="grid grid-cols-3 gap-6">
                     <div class="col-span-1">
@@ -49,7 +48,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
-    <livewire:forms.dynamic-input type="text" label="Dynamic input" for="d-input" name="d_input[]" />
 </x-app-layout>

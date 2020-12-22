@@ -14,9 +14,6 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         @livewireStyles
-
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -31,12 +28,15 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="container max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
 
         @stack('modals')
-
         @livewireScripts
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
