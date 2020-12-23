@@ -1,6 +1,5 @@
 <div x-data="modal()" xmlns:x-transition="http://www.w3.org/1999/xhtml">
-    <button type="button" x-spread="trigger" class="inline-block items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-        {{ $label }}</button>
+    {{ $button }}
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div x-show="open"
          x-transition:enter="ease-out duration-300"

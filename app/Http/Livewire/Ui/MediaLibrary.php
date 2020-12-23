@@ -17,7 +17,7 @@ class MediaLibrary extends Component
     public $user;
     public $files = [];
     public $media = [];
-    public $folder = ['id' => null, 'name' => 'oee'];
+    public $folder = ['id' => null, 'name' => ''];
     public $folders = [];
     public $cwd = null;
     public $selected = [];
@@ -34,8 +34,27 @@ class MediaLibrary extends Component
         $this->updateMedia();
     }
 
-    public function delete($id) {
-        dd($id);
+    public function deleteFolder($id) {
+        function tree($data, &$folders) {
+            if ($data->children) {
+                foreach ($data->children as $item){
+                    array_push($folders, $item->id);
+                    if ($item->children) {
+                        tree($item, $folders);
+                    }
+                }
+            }
+        }
+        $folders = [$id];
+        tree(Folder::find($id), $folders);
+        foreach ($folders as $fid) {
+            $medias = Media::query()->where('folder_id', $fid)->get();
+            foreach ($medias as $media) {
+                Storage::delete($media->url);
+                $media->delete();
+            }
+        }
+        Folder::find($id)->delete();
     }
 
     public function upload() {

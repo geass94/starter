@@ -1,7 +1,7 @@
 @if ($type == 'radio' || $type == 'checkbox')
     <div>
         <label for="{{ $for }}" class="inline-flex items-center mt-3 text-sm justify-between w-full font-medium text-gray-700">
-            <span>{{$label}}</span>
+            <span>{!! $label !!}</span>
             <input
                 {{ $attributes }}
                 type="{{ $type }}"

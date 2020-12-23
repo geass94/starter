@@ -3,7 +3,10 @@
     <form action="{{ route('admin.dashboard.store') }}" id="myform" method="POST">
         @csrf
         <input type="text" name="sandbox_name">
-        <x-ui.modal type="danger" label="My customizable modal">
+        <x-ui.modal type="danger">
+            <x-slot name="button">
+                <button type="button" x-spread="trigger">Open Modal</button>
+            </x-slot>
             <x-slot name="header">My Modal Header</x-slot>
             <livewire:ui.media-library id="sandboxer" />
             <x-slot name="action">

@@ -7,7 +7,6 @@ use Illuminate\View\Component;
 class Modal extends Component
 {
     public $type;
-    public $label;
 
     /**
      * Create a new component instance.
@@ -15,10 +14,9 @@ class Modal extends Component
      * @param string|null $type
      * @param $label
      */
-    public function __construct(string $type = null, $label)
+    public function __construct(string $type = null)
     {
         $this->type = $type ?: 'info';
-        $this->label = $label;
     }
 
     /**
