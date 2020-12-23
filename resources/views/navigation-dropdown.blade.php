@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users.index')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('admin.media.index') }}" :active="request()->routeIs('admin.media.index')">
+                        {{ __('Media') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

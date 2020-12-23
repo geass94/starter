@@ -10,7 +10,8 @@ class Sandbox extends Model
     use HasFactory;
     protected $fillable = ['name'];
 
-    public function media() {
+    public function media(): \Illuminate\Database\Eloquent\Relations\MorphToMany
+    {
         return $this->morphToMany(Media::class, 'mediable');
     }
 }

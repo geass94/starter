@@ -13,14 +13,16 @@ use Livewire\WithFileUploads;
 class MediaLibrary extends Component
 {
     use WithFileUploads;
+    public $for;
     public $user;
     public $files = [];
     public $media = [];
-    public $folder;
+    public $folder = ['id' => null, 'name' => 'oee'];
     public $folders = [];
     public $cwd = null;
 
-    public function mount() {
+    public function mount($id) {
+        $this->for = $id;
         $this->user = Auth::user();
         $this->media = Media::query()->where('folder_id', '=', $this->cwd)->get();
         $this->folders = Folder::query()->whereNull('parent_id')->with('children')->get();
@@ -31,10 +33,18 @@ class MediaLibrary extends Component
         $this->updateMedia();
     }
 
-    public function upload() {
+    public function delete($id) {
+        dd($id);
+    }
 
+    public function upload() {
+        $structure = 'files';
+        $folder = Folder::find($this->cwd);
+        if ($folder) {
+            $structure = $folder->structure();
+        }
         foreach ($this->files as $file) {
-            $path = $file->store('files', 'public');
+            $path = $file->store($structure, 'public');
             $media = Media::create([
                 'name' => $file->hashName(),
                 'original_name' => $file->getClientOriginalName(),
@@ -49,10 +59,6 @@ class MediaLibrary extends Component
         $this->updateMedia();
     }
 
-    private function updateMedia() {
-        $this->media = Media::query()->where('folder_id', '=', $this->cwd)->get();
-    }
-
     public function createFolder() {
         $folder = (object)$this->folder;
         if (isset($folder->id) && $folder->id != 'root')
@@ -65,12 +71,15 @@ class MediaLibrary extends Component
             'parent_id' => $parent
         ]);
         $fldr->owner()->associate($this->user);
-
         $this->folders = Folder::query()->whereNull('parent_id')->with('children')->get();
     }
 
     public function render()
     {
         return view('livewire.ui.media-library');
+    }
+
+    private function updateMedia() {
+        $this->media = Media::query()->where('folder_id', '=', $this->cwd)->get();
     }
 }

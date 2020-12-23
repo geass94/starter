@@ -12,6 +12,10 @@ class HomeController extends Controller
         return view('admin.dashboard', ['data' => Sandbox::query()->first()]);
     }
 
+    public function media() {
+        return view('admin.media.index');
+    }
+
     public function store(Request $request) {
         $model = Sandbox::create(['name' => $request->get('sandbox_name')]);
         $model->media()->attach($request->get('media'));
