@@ -21308,6 +21308,15 @@ window.modal = function () {
   };
 };
 
+window.mediaSelected = function () {
+  return {
+    checked: false,
+    trigger: _defineProperty({}, '@click', function click() {
+      this.checked = !this.checked;
+    })
+  };
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

@@ -32,10 +32,9 @@ class CreateMediaTable extends Migration
 
         Schema::create('mediables', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('media_id');
             $table->unsignedBigInteger('mediable_id');
-            $table->unsignedBigInteger('mediable_type');
+            $table->string('mediable_type');
 
             $table->foreign('media_id')->references('id')->on('media')->cascadeOnDelete();
         });

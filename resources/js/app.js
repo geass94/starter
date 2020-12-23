@@ -13,3 +13,15 @@ window.modal = function () {
         },
     }
 }
+
+
+window.mediaSelected = function () {
+    return {
+        checked: false,
+        trigger: {
+            ['@click']() {
+                this.checked = !this.checked
+            },
+        },
+    }
+}

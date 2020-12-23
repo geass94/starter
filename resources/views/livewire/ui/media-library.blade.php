@@ -34,8 +34,9 @@
         </div>
         <div class="w-full inline-flex flex-wrap flex-row gap-4 xl:max-h-96 overflow-y-scroll p-4">
             @foreach($media as $item)
-            <div class="bg-gray-800 text-white flex justify-around" style="max-width: 150px; max-height: 150px">
-                <img class="max-w-full max-h-full" src="{{ $item->url }}" alt="{{ $item->name }}">
+            <div x-data="mediaSelected()" class="bg-gray-800 text-white flex justify-around" style="max-width: 150px; max-height: 150px">
+                <img x-spread="trigger" class="max-w-full max-h-full border-green-600" x-bind:class="{ 'border-solid border-2': checked }" src="{{ $item->url }}" alt="{{ $item->name }}">
+                <input type="checkbox" x-bind:checked="checked" name="media[]" value="{{ $item->id }}" class="hidden">
             </div>
             @endforeach
         </div>
