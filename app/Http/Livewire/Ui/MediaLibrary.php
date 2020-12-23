@@ -20,6 +20,7 @@ class MediaLibrary extends Component
     public $folder = ['id' => null, 'name' => 'oee'];
     public $folders = [];
     public $cwd = null;
+    public $selected = [];
 
     public function mount($id) {
         $this->for = $id;

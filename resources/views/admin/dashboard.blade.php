@@ -12,8 +12,6 @@
             <x-jet-welcome />
 
 
-            <livewire:ui.media-library id="test" />
-
             <livewire:forms.dynamic-input type="text" label="Dynamic input" for="d-input" name="d_input[]" />
 
         </div>
