@@ -8,6 +8,11 @@
     <div class="py-5">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <x-starter-test />
+
+
+            <livewire:ui.media-library />
+
+
             <x-jet-welcome />
 
 
