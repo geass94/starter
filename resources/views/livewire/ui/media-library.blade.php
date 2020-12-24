@@ -1,24 +1,20 @@
-<div class="flex p-4 rounded-md shadow-lg bg-gray-100" id="media-library-{{ $for }}">
+<div class="flex p-4 rounded-md shadow-lg bg-gray-100 w-full" id="media-library-{{ $for }}">
     <div class="p-4 bg-gray-200 max-w-xs w-full border-r border-gray-50">
+        <form id="trick-nested-forms-{{ $for }}" class="hidden"></form>
         <form id="media-library-folder-form-{{ $for }}" wire:submit.prevent="createFolder">
             <div>
                 <x-forms.input type="text" wire:model="folder.name" label="Folder Name" for="folder-name-{{ $for }}" name="folder_name" />
                 <x-forms.button type="submit" label="Create"/>
             </div>
-
         <ul class="w-full">
             <li>
                 <x-forms.input type="radio" name="parent_id" wire:model="folder.id" value="root" checked="checked" label="Public" for="folder-{{ $for }}root" />
             </li>
             @foreach($folders as $folder)
                 <li>
-
-                    @if($folder->children)
-                        @include('components.livewire.media-library.folders-tree', ['data' => $folder, 'loop' => $loop])
-                    @endif
+                    @include('components.livewire.media-library.folders-tree', ['data' => $folder, 'loop' => $loop])
                 </li>
             @endforeach
-
         </ul>
         </form>
     </div>

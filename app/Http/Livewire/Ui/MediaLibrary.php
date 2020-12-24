@@ -35,26 +35,12 @@ class MediaLibrary extends Component
     }
 
     public function deleteFolder($id) {
-        function tree($data, &$folders) {
-            if ($data->children) {
-                foreach ($data->children as $item){
-                    array_push($folders, $item->id);
-                    if ($item->children) {
-                        tree($item, $folders);
-                    }
-                }
-            }
+        $folder = Folder::find($id);
+        $directories = Storage::allDirectories("public/".$folder->structure());
+        foreach ($directories as $item) {
+            Storage::deleteDirectory($item);
         }
-        $folders = [$id];
-        tree(Folder::find($id), $folders);
-        foreach ($folders as $fid) {
-            $medias = Media::query()->where('folder_id', $fid)->get();
-            foreach ($medias as $media) {
-                Storage::delete($media->url);
-                $media->delete();
-            }
-        }
-        Folder::find($id)->delete();
+        $folder->delete();
     }
 
     public function upload() {
